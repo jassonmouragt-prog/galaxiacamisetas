@@ -66,3 +66,11 @@ O banco `galaxia` contém catálogo/configurações e administrador inicial. Or�
 - Smoke HTTPS no domínio final passou: `/api/health` retornou 200/ok, home/planeta animado, formulário disponível, redirecionamento administrativo sem sessão, login com credenciais iniciais existentes, cookie Secure/HttpOnly, páginas de orçamentos/configurações, logout e ausência de overflow mobile.
 - Nenhum orçamento/pedido de teste foi criado no Neon de produção; os testes com escrita continuam nos bancos isolados.
 - CI Linux completo passou em https://github.com/jassonmouragt-prog/galaxiacamisetas/actions/runs/37225674074 (check, integração e E2E). Avisos não bloqueantes do GitHub sobre runtime de actions v4 e futura atualização da imagem ubuntu-latest.
+
+## Refinamento visual: sidebar, topo mobile e botões
+
+- Atmosfera galáctica estática e discreta em sidebar/topo mobile/login; acabamento moderno com acentos mínimos em degraus nos botões e item ativo. Implementação CSS, sem dependência adicional.
+- `npm run typecheck`, `npm run lint` e `npm run build` passaram.
+- Chromium com build de produção local: login, navegação desktop/mobile, abrir/fechar menu, acesso a orçamentos, foco visível e avanço do formulário por teclado passaram; nenhum erro JavaScript capturado.
+- Mobile 390px sem overflow horizontal da página após ancorar o rótulo acessível da tabela ao contêiner de rolagem. Tabela conserva sua própria rolagem horizontal.
+- Capturas `final-*` inspecionadas em `.impeccable/review/`. Detector de `brand-refinements.css` e `layout.tsx` sem achados.

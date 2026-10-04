@@ -110,6 +110,8 @@ Painéis usam o raio de superfície; botões e campos têm raios menores. Bordas
 
 Ações principais usam roxo e texto branco; ações destacadas usam laranja e texto escuro. Botões secundários usam superfície clara e contorno. A altura mínima geral é 46px, ou 44px na variante pequena. Hover altera fundo e desloca o botão 1px; foco usa contorno laranja de 3px com afastamento de 4px. Desabilitado reduz opacidade e mostra cursor de espera.
 
+O refinamento em `src/app/brand-refinements.css` mantém o shape arredondado e acrescenta gradiente tonal, highlight interno e um microdetalhe em degraus de 2px no canto superior. PRIMARY e CTA laranja têm presença maior; SECONDARY usa superfície suave com borda; GHOST permanece transparente. Links de ação como “Abrir” recebem acabamento leve de botão e área mínima de 44px. Ícones dos botões têm 18px. Não há contorno totalmente pixelado nem sombras rígidas exageradas; hover, pressionado, desabilitado, foco e movimento reduzido preservam o comportamento acessível.
+
 ### Cards / Containers
 
 Painéis usam fundo branco, borda sutil, raio de superfície e preenchimento de 26px no desktop, reduzido no móvel. Os cartões de métricas mantêm números tabulares. Estados vazios contém descrição explícita.
@@ -121,6 +123,8 @@ Campos têm fundo branco, borda sutil, altura mínima de 46px e preenchimento de
 ### Navigation
 
 A navegação operacional usa fundo profundo, texto claro e estado ativo roxo. Links recebem fundo tonal no hover. Em telas pequenas, o menu é aberto por controle próprio. A navegação pública reduz os links disponíveis no cabeçalho móvel.
+
+Sidebar, faixa mobile e branding do login compartilham uma atmosfera galáctica estática: base roxa, três gradientes radiais de baixa intensidade, oito estrelas esparsas subpixel e uma órbita elíptica quase transparente. As camadas decorativas não interceptam cliques e ficam atrás do conteúdo. O item ativo usa gradiente roxo, borda discreta, sombra difusa leve e o mesmo acento em degraus dos botões. A tabela mantém seus rótulos acessíveis posicionados no próprio contêiner de rolagem, evitando expansão da página no mobile.
 
 ### Chips
 

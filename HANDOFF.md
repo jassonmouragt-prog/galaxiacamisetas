@@ -69,6 +69,12 @@ O helper é local a este computador, lê `.env.local` sem imprimir credenciais e
 
 ## Próxima etapa
 
+### Refinamento visual de navegação e botões
+
+Solicitado fundo galáctico muito sutil e toque retrô premium nos botões. Implementado em `src/app/brand-refinements.css`, importado após o CSS base: sidebar, topo mobile e branding do login com névoas radiais, estrelas esparsas e órbita discreta; primary/secondary/ghost e item ativo com hierarquia preservada, highlights e microdetalhe em degraus. Botões/links de ação mantêm foco visível e boa área de clique. Corrigido overflow mobile causado pelo rótulo acessível absoluto da tabela, ancorando-o ao contêiner de rolagem.
+
+Typecheck, lint e build passaram. Revisão direcionada do build de produção local verificou desktop 1440px, mobile 390px, menu aberto/fechado, navegação, foco e avanço do orçamento via teclado, sem erros JS ou overflow da página. Capturas `final-admin-desktop.png`, `final-admin-mobile.png`, `final-admin-mobile-menu.png`, `final-home-buttons.png`, `final-quote-buttons.png` e `final-login.png` em `.impeccable/review/` (ignoradas no Git). Detector dos arquivos de UI alterados sem achados. Commit/push solicitados pelo usuário para deploy automático.
+
 ### Ajuste posterior: planeta animado e orçamento disponível
 
 A pedido do usuário, o planeta e suas órbitas receberam movimento suave via CSS, com controle de pausa, parada automática fora da tela/aba oculta e versão estática para movimento reduzido. Implementação em `src/components/planet-brand.tsx`, utilizada pela marca grande da home; sem biblioteca adicional de animação. Validação direcionada no Chromium desktop/mobile confirmou movimento real, pausa/retomada, pausa fora da tela, movimento reduzido e ausência de overflow. Capturas `desktop-motion.png` e `mobile-motion.png` em `.impeccable/review/`.
