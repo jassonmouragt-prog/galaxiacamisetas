@@ -2,7 +2,21 @@
 
 ## Retomada executada em 04/10/2026
 
-Aplicação validada localmente com Node 24.21.0, npm 11.19.0 e PostgreSQL 17.6 portátil, autorizado pelo usuário. O bloqueio anterior de acesso ao npm foi superado. Dependências instaladas e `package-lock.json` gerado. Esta pasta continua sem repositório Git; o lockfile está salvo, mas não foi commitado.
+Aplicação validada localmente com Node 24.21.0, npm 11.19.0 e PostgreSQL 17.6 portátil, autorizado pelo usuário. O bloqueio anterior de acesso ao npm foi superado. Dependências instaladas e `package-lock.json` gerado. Na retomada inicial a pasta não tinha Git; posteriormente o usuário solicitou publicação e o projeto/lockfile foram versionados no repositório público abaixo.
+
+## Publicação via Git
+
+- GitHub: https://github.com/jassonmouragt-prog/galaxiacamisetas (público, branch `main`).
+- Vercel: projeto `galaxiacamisetas`, equipe `jason-3c4d`, conectado ao GitHub para deploy automático.
+- Domínio de produção: https://galaxiacamisetas.vercel.app ; admin em `/admin/login`.
+- PostgreSQL Neon `galaxia-production`, plano gratuito autorizado pelo usuário, região `gru1`. Produção não depende do banco portátil deste computador.
+- Migrações 001/002 e seed administrativo aplicados no Neon. Credenciais usadas via processo temporário, sem impressão ou inclusão no repositório.
+- `APP_URL` de produção configurada na Vercel; conexão PostgreSQL fornecida pela integração Neon somente para Production.
+- `vercel.json` fixa Next.js, `npm ci`, build e região São Paulo; workflow GitHub usa `npm ci` e PostgreSQL próprio para testes.
+- Validações completas reexecutadas após a animação: typecheck, lint, build, 25 unitários, 7 integração e 6 E2E passaram. Typecheck gera os tipos Next.js antes de compilar, inclusive em checkout novo.
+- Ignorados no Git: `.env.local`, `.vercel`, caches, resultados/capturas locais, skills instaladas pela integração e ZIP antigo. 79 arquivos preparados foram conferidos contra credenciais locais e de produção antes do commit inicial.
+
+Para próximas alterações: verificar status/diff, validar em bancos isolados, aplicar novas migrações de forma controlada e fazer push na `main` para publicação. Não executar E2E com escrita no banco Neon de produção. Preview ainda não possui banco próprio conectado.
 
 WhatsApp confirmado: **+55 84 99921-5556**. Valores continuam provisórios e editáveis, identificados na interface e no WhatsApp. Assets oficiais preservados em `public/brand/`. `.env.local` contém as credenciais locais e permanece ignorado pelo Git.
 

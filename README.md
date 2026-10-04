@@ -4,7 +4,19 @@ Aplicação Next.js + PostgreSQL para orçamento público e gestão de atendimen
 
 ## Estado da entrega
 
-Retomada local concluída em 04/10/2026: typecheck, lint, build, 25 testes unitários, 7 testes de integração PostgreSQL e 6 testes de navegador passaram. Capturas desktop/mobile inspecionadas e navegação por teclado verificada no fluxo público. Dependências instaladas e lockfile salvo. PostgreSQL 17.6 portátil preparado neste computador; comandos de reinício em `HANDOFF.md`. A publicação em hospedagem HTTPS e banco durável ainda é uma etapa posterior.
+Retomada local concluída em 04/10/2026: typecheck, lint, build, 25 testes unitários, 7 testes de integração PostgreSQL e 6 testes de navegador passaram. Capturas desktop/mobile inspecionadas e navegação por teclado verificada no fluxo público. Dependências instaladas e lockfile versionado. Deploy via GitHub/Vercel configurado, com PostgreSQL Neon exclusivo para produção. Banco portátil local e bancos de testes permanecem separados da produção.
+
+## GitHub e Vercel
+
+- Repositório público: https://github.com/jassonmouragt-prog/galaxiacamisetas
+- Endereço de produção: https://galaxiacamisetas.vercel.app
+- Administração: https://galaxiacamisetas.vercel.app/admin/login
+- Branch de produção: `main`. Cada push nessa branch aciona o deploy pela integração Git da Vercel.
+- Projeto Vercel `galaxiacamisetas`, equipe `jason-3c4d`, Node 24.x, região `gru1` (São Paulo).
+- Banco Neon `galaxia-production`, plano gratuito, região São Paulo. Integração conectada somente ao ambiente Production; Preview precisa de um banco isolado próprio para testar escrita.
+- `DATABASE_URL` é fornecida pela integração Neon e `APP_URL` está configurada como `https://galaxiacamisetas.vercel.app` na Vercel.
+
+O administrador inicial de produção foi criado por seed, usando as credenciais locais existentes somente durante esse processo. A senha não está no Git nem foi adicionada como variável permanente de deploy. Migrações 001/002 aplicadas antes da primeira publicação; novas migrações devem ser aplicadas explicitamente ao banco de produção antes do código que depende delas. CI usa PostgreSQL temporário próprio e não acessa o banco de produção.
 
 ## Executar localmente
 
@@ -57,7 +69,7 @@ Para E2E, use uma cópia isolada do ambiente com `DATABASE_URL` de testes, migra
 
 ## Publicação
 
-Instale dependências com `npm ci` e versione o lockfile salvo quando o projeto receber um repositório Git. Rode `npm audit` e todas as verificações acima. Na retomada, o audit de produção não encontrou vulnerabilidades; o audit completo identificou 5 achados altos na cadeia de desenvolvimento do ESLint (detalhes em `VERIFICACAO.md`). Use PostgreSQL gerenciado com TLS configurado na URL, credenciais exclusivas, backup e restauração testada. Configure `APP_URL` com a origem HTTPS exata, aplique `db:migrate`, crie o administrador uma única vez, execute `npm run build` e `npm start`.
+Instale dependências com `npm ci`, usando o lockfile versionado, e rode `npm run check`, integração e E2E em bancos isolados antes de publicar alterações. Na retomada, o audit de produção não encontrou vulnerabilidades; o audit completo identificou 5 achados altos na cadeia de desenvolvimento do ESLint (detalhes em `VERIFICACAO.md`). A Vercel executa `npm ci` e `npm run build` conforme `vercel.json`; pushes na `main` acionam publicação automática. O PostgreSQL Neon usa TLS. Configure backup e restauração conforme a operação e o plano contratado, confirme a tabela comercial e mantenha as políticas de dados atualizadas.
 
 Cookies são Secure em produção: a aplicação publicada requer HTTPS. As mutações validam Origin contra APP_URL. O proxy de hospedagem deve limitar tamanho de requisições e taxa por IP; a aplicação também limita tentativas de login e emissão pelo banco. Não habilite cache de páginas administrativas, APIs ou resultados privados. `GET /api/health` verifica acesso à tabela de configuração e retorna 503 se o banco estiver indisponível.
 

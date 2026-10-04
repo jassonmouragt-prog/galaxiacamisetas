@@ -51,3 +51,11 @@ Data: 04/10/2026.
 Tratar os achados de dependências de desenvolvimento; configurar hospedagem HTTPS, banco durável com backup, políticas operacionais de dados e tabela comercial confirmada. A instância portátil em diretório temporário serve ao desenvolvimento e à validação local.
 
 O banco `galaxia` contém catálogo/configurações e administrador inicial. Orçamentos e pedidos criados pelos testes estão exclusivamente no banco E2E; o schema de integração foi removido. `.env.local` permanece ignorado pelo Git. O ZIP da entrega anterior não foi regenerado; a pasta atual contém o estado atualizado.
+
+## Preparação da publicação solicitada pelo usuário
+
+- GitHub público `jassonmouragt-prog/galaxiacamisetas`, branch `main`, integrado ao projeto Vercel `galaxiacamisetas` na equipe `jason-3c4d`.
+- Neon gratuito criado em São Paulo, conectado somente à produção. Migrações 001/002 e seed aplicados; banco separado da aplicação e testes locais.
+- Configuração de produção: domínio `galaxiacamisetas.vercel.app`, APP_URL HTTPS correspondente, Next.js/Node 24.x, região `gru1`, instalação reproduzível via `npm ci`.
+- `npm run check`, 7 testes de integração e 6 E2E reexecutados após a animação e preparação de deploy: todos passaram. Ajustado acesso ao atributo DOM de animação para satisfazer a regra de imutabilidade do lint, sem suprimir a regra.
+- Verificação dos 79 arquivos do commit inicial contra credenciais locais/Neon e padrões de tokens: nenhum secret detectado. Arquivos de ambiente, ZIPs e artefatos locais excluídos do Git.
