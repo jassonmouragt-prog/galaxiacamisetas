@@ -1,0 +1,9 @@
+import Link from 'next/link';
+import {notFound} from 'next/navigation';
+import {query} from '@/lib/db';
+import {requireAdmin} from '@/lib/auth';
+import {code,money,dateLabel,orderStatuses,labels} from '@/lib/domain';
+import type {Order} from '@/lib/types';
+import {PageTitle,Status} from '@/components/ui';
+import {OrderForm} from '@/components/admin-actions';
+export default async function OrderDetail({params}:{params:Promise<{id:string}>}){await requireAdmin();const {id}=await params;if(!/^[a-f0-9-]{36}$/.test(id))notFound();const order=(await query<Order>(`SELECT o.*,q.total_cents,q.details,q.details->>'name' AS customer_name FROM orders o JOIN quotes q ON q.id=o.quote_id WHERE o.id=$1`,[id]))[0];if(!order)notFound();return <><Link className="back-link" href="/admin/pedidos">← Todos os pedidos</Link><PageTitle title={code(order.number,'P')} description={`${order.customer_name} · Criado em ${dateLabel(order.created_at)}`} action={<Status value={order.status}/>}/><div className="detail-grid"><section className="panel"><h2>Uma ideia em produção.</h2><ol className="production-track">{orderStatuses.filter(s=>s!=='CANCELADO').map((s,index)=><li className={s===order.status?'current':''} key={s}><span>{index+1}</span>{labels[s]}</li>)}</ol><dl className="details"><div><dt>Cliente</dt><dd>{order.customer_name}</dd></div><div><dt>Quantidade</dt><dd>{order.details.quantity} peças</dd></div><div><dt>Entrega combinada</dt><dd>{dateLabel(order.delivery_date)}</dd></div><div><dt>Total</dt><dd>{money(order.total_cents)}</dd></div></dl><Link className="text-link" href={`/admin/orcamentos/${order.quote_id}`}>Ver arte, personalizações e orçamento de origem</Link></section><section className="panel"><OrderForm id={id} status={order.status} deliveryDate={order.delivery_date} notes={order.notes}/></section></div></>;}

@@ -1,0 +1,14 @@
+node_modules/
+.npm-cache/
+.next/
+.env*
+!.env.example
+.local-db/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.vercel/
+.agents/
+skills-lock.json
+.impeccable/review/
+*.zip

@@ -1,0 +1,9 @@
+import Link from 'next/link';
+import {query} from '@/lib/db';
+import {requireAdmin} from '@/lib/auth';
+import {quoteStatuses,labels} from '@/lib/domain';
+import type {Quote} from '@/lib/types';
+import {PageTitle} from '@/components/ui';
+import {QuoteTable} from '@/components/admin-tables';
+import {AutoRefresh} from '@/components/refresh';
+export default async function Quotes({searchParams}:{searchParams:Promise<{q?:string;status?:string;page?:string}>}){await requireAdmin();const s=await searchParams;const term=(s.q??'').slice(0,100);const status=quoteStatuses.includes(s.status as typeof quoteStatuses[number])?s.status:'';const page=Math.max(1,Math.min(100000,Math.floor(Number(s.page)||1)));const rows=await query<Quote>(`SELECT * FROM quotes WHERE ($1='' OR details->>'name' ILIKE '%'||$1||'%' OR ('GAL-Q-'||lpad(number::text,greatest(5,length(number::text)),'0')) ILIKE '%'||$1||'%' OR details->>'phone' ILIKE '%'||$1||'%') AND ($2='' OR status=$2) ORDER BY created_at DESC LIMIT 31 OFFSET $3`,[term,status,(page-1)*30]);const href=(p:number)=>`/admin/orcamentos?${new URLSearchParams({q:term,status:status??'',page:String(p)})}`;return <><AutoRefresh/><PageTitle title="Orçamentos" description="Cada ideia recebida, com todos os detalhes em um só lugar."/><section className="panel"><form className="filters"><label className="search-label">Buscar<input name="q" defaultValue={term} placeholder="Nome, código ou WhatsApp"/></label><label>Status<select name="status" defaultValue={status}><option value="">Todos os status</option>{quoteStatuses.map(v=><option key={v} value={v}>{labels[v]}</option>)}</select></label><button className="button secondary">Filtrar</button></form><QuoteTable rows={rows.slice(0,30)}/><div className="pagination">{page>1&&<Link href={href(page-1)}>Anterior</Link>}<span>Página {page}</span>{rows.length>30&&<Link href={href(page+1)}>Próxima</Link>}</div></section></>;}

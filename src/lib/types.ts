@@ -1,0 +1,7 @@
+export type CatalogItem = { id: string; name: string; priceCents: number };
+export type Settings = { enabled: boolean; provisional: boolean; whatsapp: string; minimumQuantity: number; productionDays: number; validityDays: number; artFeeCents: number; models: CatalogItem[]; prints: CatalogItem[]; discounts: { from: number; percent: number }[] };
+export type QuoteInput = { requestKey: string; event: string; modelId: string; quantity: number; printIds: string[]; art: 'PRONTA' | 'CRIAR' | 'SEM_ARTE'; eventDate: string; deliveryDate: string; name: string; phone: string; city: string; notes: string; consent: boolean };
+export type Pricing = { model: CatalogItem; prints: CatalogItem[]; quantity: number; unitCents: number; subtotalCents: number; discountPercent: number; discountCents: number; artCents: number; totalCents: number; whatsapp: string; provisional: boolean };
+export type Quote = { id: string; number: string; public_token: string; customer_id: string; status: string; details: QuoteInput; pricing: Pricing; total_cents: number; delivery_date: string; event_date: string; valid_until: Date; created_at: Date; customer_name?: string; phone?: string; order_id?: string };
+export type Order = { id: string; number: string; quote_id: string; status: string; delivery_date: string; notes: string; created_at: Date; customer_name: string; total_cents: number; details: QuoteInput };
+export type Followup = { id: string; quote_id: string; due_at: Date; note: string; done: boolean; number: string; customer_name: string };

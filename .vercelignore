@@ -1,0 +1,9 @@
+.env*
+.npm-cache/
+.agents/
+skills-lock.json
+.impeccable/review/
+test-results/
+playwright-report/
+*.zip
+*.tsbuildinfo
