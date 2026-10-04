@@ -46,7 +46,7 @@ Data: 04/10/2026.
 - Detector visual no CSS: alerta de fonte Montserrat (identidade aprovada) e advisories de escala tipográfica/raios parcialmente representados no frontmatter de DESIGN.md. Os valores contextuais e raios de status já são descritos no corpo do documento; não foram constatadas falhas de fluxo por esses alertas.
 - A verificação de acessibilidade foi direcionada a semântica, nomes dos controles e teclado no fluxo público; não equivale a auditoria WCAG completa com leitor de tela, contraste de todos os estados ou todas as larguras.
 
-## Pendente antes de publicação
+## Pendências operacionais registradas na retomada inicial
 
 Tratar os achados de dependências de desenvolvimento; configurar hospedagem HTTPS, banco durável com backup, políticas operacionais de dados e tabela comercial confirmada. A instância portátil em diretório temporário serve ao desenvolvimento e à validação local.
 
@@ -59,3 +59,10 @@ O banco `galaxia` contém catálogo/configurações e administrador inicial. Or�
 - Configuração de produção: domínio `galaxiacamisetas.vercel.app`, APP_URL HTTPS correspondente, Next.js/Node 24.x, região `gru1`, instalação reproduzível via `npm ci`.
 - `npm run check`, 7 testes de integração e 6 E2E reexecutados após a animação e preparação de deploy: todos passaram. Ajustado acesso ao atributo DOM de animação para satisfazer a regra de imutabilidade do lint, sem suprimir a regra.
 - Verificação dos 79 arquivos do commit inicial contra credenciais locais/Neon e padrões de tokens: nenhum secret detectado. Arquivos de ambiente, ZIPs e artefatos locais excluídos do Git.
+
+## Publicação concluída
+
+- Deploy automático acionado pelo push na `main`; Vercel confirmou Production Ready, alias `https://galaxiacamisetas.vercel.app` e funções na região `gru1`.
+- Smoke HTTPS no domínio final passou: `/api/health` retornou 200/ok, home/planeta animado, formulário disponível, redirecionamento administrativo sem sessão, login com credenciais iniciais existentes, cookie Secure/HttpOnly, páginas de orçamentos/configurações, logout e ausência de overflow mobile.
+- Nenhum orçamento/pedido de teste foi criado no Neon de produção; os testes com escrita continuam nos bancos isolados.
+- CI Linux completo passou em https://github.com/jassonmouragt-prog/galaxiacamisetas/actions/runs/37225674074 (check, integração e E2E). Avisos não bloqueantes do GitHub sobre runtime de actions v4 e futura atualização da imagem ubuntu-latest.

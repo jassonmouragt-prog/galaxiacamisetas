@@ -6,6 +6,7 @@ Aplicação validada localmente com Node 24.21.0, npm 11.19.0 e PostgreSQL 17.6 
 
 ## Publicação via Git
 
+- **Publicação concluída em 04/10/2026** pelo push na `main`, com deploy Production Ready e alias HTTPS `galaxiacamisetas.vercel.app` confirmado.
 - GitHub: https://github.com/jassonmouragt-prog/galaxiacamisetas (público, branch `main`).
 - Vercel: projeto `galaxiacamisetas`, equipe `jason-3c4d`, conectado ao GitHub para deploy automático.
 - Domínio de produção: https://galaxiacamisetas.vercel.app ; admin em `/admin/login`.
@@ -15,6 +16,8 @@ Aplicação validada localmente com Node 24.21.0, npm 11.19.0 e PostgreSQL 17.6 
 - `vercel.json` fixa Next.js, `npm ci`, build e região São Paulo; workflow GitHub usa `npm ci` e PostgreSQL próprio para testes.
 - Validações completas reexecutadas após a animação: typecheck, lint, build, 25 unitários, 7 integração e 6 E2E passaram. Typecheck gera os tipos Next.js antes de compilar, inclusive em checkout novo.
 - Ignorados no Git: `.env.local`, `.vercel`, caches, resultados/capturas locais, skills instaladas pela integração e ZIP antigo. 79 arquivos preparados foram conferidos contra credenciais locais e de produção antes do commit inicial.
+- Smoke no domínio final passou: health/banco, home animada, formulário, login administrativo, cookie Secure/HttpOnly, orçamentos, configurações, logout e mobile. Nenhum orçamento ou pedido de teste foi criado em produção.
+- CI GitHub completo passou: https://github.com/jassonmouragt-prog/galaxiacamisetas/actions/runs/37225674074 . O administrador online utiliza as mesmas credenciais iniciais locais, até alteração pelo painel.
 
 Para próximas alterações: verificar status/diff, validar em bancos isolados, aplicar novas migrações de forma controlada e fazer push na `main` para publicação. Não executar E2E com escrita no banco Neon de produção. Preview ainda não possui banco próprio conectado.
 
@@ -72,6 +75,6 @@ A pedido do usuário, o planeta e suas órbitas receberam movimento suave via CS
 
 O usuário encontrou a mensagem de orçamento indisponível porque o PostgreSQL havia sido encerrado ao concluir a validação inicial. A instância foi reiniciada: `/api/health` retornou `{"status":"ok"}` e o formulário de orçamento foi confirmado no navegador. **Neste estado posterior, o banco está ativo para acompanhar o servidor de desenvolvimento aberto pelo usuário.** Encerrá-lo enquanto o site estiver em uso volta a indisponibilizar orçamento e administração. As verificações globais registradas acima antecedem este ajuste; o ajuste foi validado diretamente no navegador.
 
-A execução local do handoff está concluída. Antes da publicação, tratar os achados de dependências de desenvolvimento, preparar hospedagem HTTPS e banco durável com backup, confirmar a tabela comercial e revisar as políticas operacionais conforme README. Permanecem avisos não bloqueantes do Next.js sobre preload da logo/LCP e declaração de scroll suave; o detector visual sinalizou escala tipográfica parcialmente descrita no frontmatter e a fonte Montserrat, que faz parte da identidade aprovada.
+A execução local do handoff e a publicação GitHub/Vercel estão concluídas. Como continuidade operacional, tratar os achados de dependências de desenvolvimento, definir backup/restauração compatíveis com o plano Neon, confirmar a tabela comercial e revisar as políticas de dados conforme README. Permanecem avisos não bloqueantes do Next.js sobre preload da logo/LCP e declaração de scroll suave; o detector visual sinalizou escala tipográfica parcialmente descrita no frontmatter e a fonte Montserrat, que faz parte da identidade aprovada.
 
 O ZIP `galaxia-camisetas-handoff.zip` continua sendo o snapshot **anterior** à retomada; não contém estas correções, lockfile ou resultados. O estado atual está nesta pasta. `VERIFICACAO.md` detalha a validação.
